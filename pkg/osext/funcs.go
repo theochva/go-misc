@@ -22,7 +22,7 @@ func ReadFile(filename string, trim bool) (bytes []byte, err error) {
 	return
 }
 
-// ReadFileToString - read the contents of a file and optionally trim any whitespace.
+// ReadFileAsString - read the contents of a file and optionally trim any whitespace.
 func ReadFileAsString(filename string, trim bool) (contents string, err error) {
 	var bytes []byte
 
@@ -73,10 +73,7 @@ func FileExists(filename string) bool {
 // FileOrDirectoryExists - check if specified filename (which is a file or directory) exists
 func FileOrDirectoryExists(filename string) bool {
 	_, err := os.Stat(filename)
-	if os.IsNotExist(err) {
-		return false
-	}
-	return true
+	return !os.IsNotExist(err)
 }
 
 // IsDirectory - check if specified filename is a directory
